@@ -1,0 +1,140 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0faf1;
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Image Section */
+.image-container {
+    margin-bottom: 20px;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Box Styles */
+.form-box {
+    padding: 20px;
+    background-color: #f9fff9;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 150, 0, 0.15);
+}
+
+/* Sign In Specific Styling */
+.sign-in h2 {
+    color: #2d7a2e;
+}
+
+.sign-in h3 {
+    color: #41634a;
+}
+
+/* Sign Up Specific Styling */
+.sign-up h2 {
+    color: #00571e;
+}
+
+.sign-up h3 {
+    color: #2d7a2e;
+}
+
+/* Input Field Styles */
+.input-box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #00a100;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f0faf1;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #00a100;
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #00a100;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #007d00;
+}
+
+/* Links */
+a {
+    color: #00a100;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Social Login */
+.social-login {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+.social-login img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

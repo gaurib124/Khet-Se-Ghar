@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Khet se Ghar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: #2e7d32;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c8e6c9;
+        }
+
+        .cart-icon {
+            font-size: 20px;
+        }
+
+        .cart-container {
+            padding: 50px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-items {
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .cart-item:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            padding-left: 15px;
+        }
+
+        .cart-item-details h4 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .cart-item-details .price {
+            color: #4CAF50;
+            font-size: 16px;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .cart-item-actions button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .cart-item-actions button:hover {
+            background-color: #d32f2f;
+        }
+
+        .cart-summary {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-summary h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .cart-summary .total {
+            font-size: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .cart-summary button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .cart-summary button:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">Khet se Ghar</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="cart-icon"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <div class="cart-container">
+        <div class="cart-header">
+            <h2>Your Shopping Cart</h2>
+        </div>
+
+        <div id="cart-items" class="cart-items">
+            <!-- Cart Items will be injected dynamically -->
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+            <h3>Order Summary</h3>
+            <p id="total-items">Total items: 0</p>
+            <p id="total-price" class="total">₹0</p>
+            <button onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Khet se Ghar. All rights reserved.</p>
+    </footer>
+
+    <!-- Optional JavaScript -->
+  
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.5/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Cart data, can be dynamic based on actual cart content
+        const products = {
+            1: { name: "Grapes", price: 100, image: "https://i.postimg.cc/ZRW92TN2/product1.jpg", quantity: "1kg" },
+            2: { name: "Cauliflower", price: 50, image: "https://i.postimg.cc/fRHRNGMN/product2.jpg", quantity: "500g" }
+        };
+
+        function loadCart(productId) {
+            const cartContainer = document.getElementById('cart-items');
+            const cartSummary = document.querySelector('.cart-summary');
+            const totalItems = document.getElementById('total-items');
+            const totalPrice = document.getElementById('total-price');
+
+            // Clear previous cart
+            cartContainer.innerHTML = "";
+
+            // Add selected item to cart
+            const product = products[productId];
+            if (product) {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="cart-item-details">
+                        <h4>${product.name}</h4>
+                        <p class="price">₹${product.price} per kg</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <p>Quantity: ${product.quantity}</p>
+                        <button>Remove</button>
+                    </div>
+                `;
+                cartContainer.appendChild(cartItem);
+
+                // Update summary
+                totalItems.textContent = `Total items: 1`;
+                totalPrice.textContent = `₹${product.price}`;
+            }
+        }
+
+        // Trigger the cart load based on the clicked product
+        function selectProduct(productId) {
+            loadCart(productId);
+        }
+
+        // Simulate clicking on products
+        document.querySelectorAll('.product-link').forEach(item => {
+            item.addEventListener('click', function() {
+                selectProduct(item.dataset.productId);
+            });
+        });
+
+        // Load a default product on page load (you can change it based on the link clicked)
+        loadCart(1); // For example, this will load "Grapes"
+    </script> -->
+    <script>
+    // Cart data, can be dynamic based on actual cart content
+const products = {
+    1: { name: "Grapes", price: 100, image: "https://i.postimg.cc/ZRW92TN2/product1.jpg", quantity: "1kg" },
+    2: { name: "Cauliflower", price: 50, image: "https://i.postimg.cc/fRHRNGMN/product2.jpg", quantity: "500g" }
+};
+
+// Store the cart items here
+let cart = {};
+
+// Load cart items and update summary
+function loadCart() {
+    const cartContainer = document.getElementById('cart-items');
+    const cartSummary = document.querySelector('.cart-summary');
+    const totalItems = document.getElementById('total-items');
+    const totalPrice = document.getElementById('total-price');
+
+    // Clear the cart display
+    cartContainer.innerHTML = "";
+
+    // Initialize variables to calculate the total items and price
+    let totalQuantity = 0;
+    let totalAmount = 0;
+
+    // Loop through the cart object to display the cart items
+    for (let productId in cart) {
+        const product = cart[productId];
+        
+        // Create cart item element
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <div class="cart-item-details">
+                <h4>${product.name}</h4>
+                <p class="price">₹${product.price} per kg</p>
+            </div>
+            <div class="cart-item-actions">
+                <p>Quantity: ${product.quantity}</p>
+                <button onclick="removeFromCart(${productId})">Remove</button>
+            </div>
+        `;
+        cartContainer.appendChild(cartItem);
+
+        // Update totals
+        totalQuantity++;
+        totalAmount += product.price;
+    }
+
+    // Update the cart summary
+    totalItems.textContent = `Total items: ${totalQuantity}`;
+    totalPrice.textContent = `₹${totalAmount}`;
+}
+
+// Add product to the cart
+function addToCart(productId) {
+    if (!cart[productId]) {
+        const product = products[productId];
+        cart[productId] = product; // Add the product to the cart
+    }
+    loadCart(); // Reload the cart display
+}
+
+// Remove product from the cart
+function removeFromCart(productId) {
+    delete cart[productId]; // Remove product from the cart object
+    loadCart(); // Reload the cart display after removal
+}
+
+// Simulate adding products to cart (you can trigger this based on product selection)
+document.querySelectorAll('.product-link').forEach(item => {
+    item.addEventListener('click', function() {
+        const productId = item.dataset.productId;
+        addToCart(productId);
+    });
+});
+
+// You can call addToCart directly to add products to the cart initially or based on user actions
+addToCart(1); // Example: Adds Grapes to the cart on page load
+</script>
+</body>
+
+</html>

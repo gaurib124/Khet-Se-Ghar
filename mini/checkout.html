@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmEasy Checkout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="js/jquery.store.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        #checkout-page {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #content h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #28a745;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        #checkout-cart {
+            width: 100%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+        }
+
+        #checkout-cart th,
+        #checkout-cart td {
+            padding: 14px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        #checkout-cart th {
+            background-color: #f1f1f1;
+            font-weight: 500;
+            color: #555;
+        }
+
+        #checkout-cart td {
+            background-color: #fafafa;
+        }
+
+        #pricing {
+            margin-top: 30px;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #pricing p {
+            margin-left: 20px;
+            color: #333;
+        }
+
+        #pricing strong {
+            color: #333;
+            font-weight: 500;
+        }
+
+        form h2 {
+            font-size: 1.5em;
+            color: #28a745;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #28a745;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        legend {
+            font-size: 1.2em;
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, select:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+
+        #shipping-same {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #333;
+            color: #fff;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 767px) {
+            #checkout-page {
+                padding: 15px;
+            }
+
+            form h2 {
+                font-size: 1.3em;
+            }
+
+            .btn {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            #pricing {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #checkout-cart th, #checkout-cart td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body id="checkout-page">
+
+<div id="site">
+    <header id="masthead"></header>
+    <div id="content">
+        <h1>Checkout</h1>
+        <table id="checkout-cart" class="shopping-cart">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be dynamically populated here -->
+            </tbody>
+        </table>
+
+        <div id="pricing">
+            <p id="shipping">
+                <strong>Shipping:</strong> <span id="sshipping">$0.00</span>
+            </p>
+            <p id="sub-total">
+                <strong>Total:</strong> <span id="stotal">$0.00</span>
+            </p>
+        </div>
+
+        <form action="order.html" id="checkout-order-form">
+            <h2>Your Details</h2>
+
+            <fieldset id="fieldset-billing">
+                <legend>Billing</legend>
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required placeholder="Enter your full name" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required placeholder="Enter your email address" />
+                </div>
+                <div>
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city" required placeholder="Enter your city" />
+                </div>
+                <div>
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" required placeholder="Enter your address" />
+                </div>
+                <div>
+                    <label for="zip">ZIP Code</label>
+                    <input type="text" name="zip" id="zip" required placeholder="Enter ZIP code" />
+                </div>
+                <div>
+                    <label for="country">Country</label>
+                    <select name="country" id="country" required>
+                        <option value="">Select your country</option>
+                        <option value="De">Denmark</option>
+                        <option value="IN">India</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <div id="shipping-same">
+                <label>Same as Billing <input type="checkbox" id="same-as-billing" /></label>
+            </div>
+
+            <fieldset id="fieldset-shipping">
+                <legend>Shipping</legend>
+                <div>
+                    <label for="sname">Name</label>
+                    <input type="text" name="sname" id="sname" required placeholder="Enter recipient's name" />
+                </div>
+                <div>
+                    <label for="semail">Email</label>
+                    <input type="email" name="semail" id="semail" required placeholder="Enter recipient's email" />
+                </div>
+                <div>
+                    <label for="scity">City</label>
+                    <input type="text" name="scity" id="scity" required placeholder="Enter recipient's city" />
+                </div>
+                <div>
+                    <label for="saddress">Address</label>
+                    <input type="text" name="saddress" id="saddress" required placeholder="Enter recipient's address" />
+                </div>
+                <div>
+                    <label for="szip">ZIP Code</label>
+                    <input type="text" name="szip" id="szip" required placeholder="Enter ZIP code" />
+                </div>
+                <div>
+                    <label for="scountry">Country</label>
+                    <select name="scountry" id="scountry" required>
+                        <option value="">Select your country</option>
+                        <option value="De">Denmark</option>
+                        <option value="IN">India</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            
+        </form>
+
+        <form action="order-success.html" id="checkout-order-form" onsubmit="submitOrder(event)">
+            
+
+            <!-- Billing and Shipping fields go here -->
+
+            <p><input type="submit" id="submit-order" value="Submit Order" class="btn" /></p>
+        </form>
+        <script>
+            // Function to handle form submission
+            function submitOrder(event) {
+                event.preventDefault();  // Prevents the default form submission
+        
+                // Optionally, you can add form validation here
+        
+                // Simulate the order being submitted and redirect to success page
+                setTimeout(function() {
+                    window.location.href = "order-success.html";  // Redirect to the success page
+                }, 500); // Simulate a small delay before redirection
+            }
+        </script>
+    </div>
+</div

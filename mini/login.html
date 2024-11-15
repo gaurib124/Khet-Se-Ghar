@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #a8e063, #71f92e); /* Gradient with shades of green */
+    color: #333;
+}
+
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 750px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            position: relative;
+            transition: opacity 0.5s;
+        }
+
+        .form-container {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 80%;
+            padding: 8px 10px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #ff7e5f;
+            outline: none;
+        }
+
+        .btn {
+            width: 80%;
+            padding: 8px;
+            background: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #e66953;
+        }
+
+        .role-container {
+            margin-bottom: 10px;
+        }
+
+        .role-container label {
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-link {
+            color: #ff7e5f;
+            cursor: pointer;
+            text-decoration: underline;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .image-container {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            max-width: 105%;
+            max-height: 1150%;
+            border-radius: 0px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="signInContainer">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Sign In</h2>
+            </div>
+            <form id="signInForm" action="handle_signin.php" method="post">
+                <div class="form-group">
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="text" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="language">Language:</label>
+                    <select id="language" name="language">
+                        <option value="english">English</option>
+                        <option value="marathi">Marathi</option>
+                    </select>
+                </div>
+                <div class="role-container">
+                    <label>Select Role:</label>
+                    <div>
+                        <label><input type="radio" name="role" value="Farmer" required> Farmer</label>
+                        <label><input type="radio" name="role" value="Customer" required> Customer</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+            <div class="form-footer">
+                <span class="toggle-link" onclick="toggleForms('signUp')">Don't have an account? Sign Up</span>
+            </div>
+        </div>
+        <div class="image-container">
+          
+            <img src="fruit.png" alt="Sign In Image">
+
+        </div>
+    </div>
+
+    <div class="container hidden" id="signUpContainer">
+        <div class="image-container">
+            <img src="fruit.png" alt="Sign Up Image">
+        </div>
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Sign Up</h2>
+            </div>
+            <form id="signUpForm" action="handle_signup.php" method="post">
+                <div class="form-group">
+                    <label for="new-mobile">Mobile Number:</label>
+                    <input type="text" id="new-mobile" name="mobile" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Password:</label>
+                    <input type="password" id="new-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-language">Language:</label>
+                    <select id="new-language" name="language">
+                        <option value="english">English</option>
+                        <option value="marathi">Marathi</option>
+                    </select>
+                </div>
+                <div class="role-container">
+                    <label>Select Role:</label>
+                    <div>
+                        <label><input type="radio" name="role" value="Farmer" required> Farmer</label>
+                        <label><input type="radio" name="role" value="Customer" required> Customer</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <div class="form-footer">
+                <span class="toggle-link" onclick="toggleForms('signIn')">Already have an account? Sign In</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForms(formType) {
+            const signInContainer = document.getElementById('signInContainer');
+            const signUpContainer = document.getElementById('signUpContainer');
+
+            if (formType === 'signIn') {
+                signUpContainer.classList.add('hidden');
+                signInContainer.classList.remove('hidden');
+            } else {
+                signInContainer.classList.add('hidden');
+                signUpContainer.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
